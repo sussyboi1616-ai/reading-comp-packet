@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vault Brawl</title><link rel="stylesheet" href="/arcade/games/vault-duel/style.css">
+</head>
+<body><div id="app">
+<section class="screen active menu-screen" id="screen-menu">
+  <div class="menu-noise"></div>
+  <header class="menu-top"><div class="mini-brand"><span class="vault-mark">V</span><span>THE VAULT ARCADE</span></div><div class="top-actions"><div class="coin-pill">◉ <span id="menuCoins">0</span></div><button type="button" class="icon-btn" data-go="settings" aria-label="Settings">⚙</button></div></header>
+  <div class="menu-hero"><div class="hero-kicker">LOCAL MULTIPLAYER</div><h1 class="logo"><span>VAULT</span> BRAWL</h1><p class="tag">Pick your fighter. Lock your loadout. Own the arena.</p>
+    <div class="versus-art" aria-hidden="true"><div class="hero-fighter hero-left"><i></i><b></b><em></em></div><div class="hero-vs">VS</div><div class="hero-fighter hero-right"><i></i><b></b><em></em></div></div>
+    <div class="menu-btns menu-btns-4"><button type="button" class="btn primary big" data-go="select"><span>LOCAL BATTLE</span><small>2 players · one keyboard</small></button><button type="button" class="btn online-btn" data-go="online-menu"><span>ONLINE BATTLE</span><small>Matchmaking · room codes</small></button><button type="button" class="btn" data-go="shop"><span>VAULT SHOP</span><small>Chests and unlocks</small></button><button type="button" class="btn ghost" data-go="roster"><span>FIGHTER FILES</span><small>Stats and abilities</small></button></div>
+  </div>
+  <footer class="menu-footer"><span>P1 · A / D move · W jump · S attack · E special</span><span>P2 · ← / → move · ↑ jump · ↓ attack · Shift special</span></footer>
+</section>
+
+<section class="screen select-screen" id="screen-select">
+  <header class="select-topbar"><button type="button" class="back-btn" data-go="menu">← BACK</button><div><span class="eyebrow">MATCH SETUP</span><h2>Choose your fighters</h2></div><div class="coin-pill sm">◉ <span id="selectCoins">0</span></div></header>
+  <div class="versus-lobby">
+    <article class="player-bay p1-bay" id="p1Bay"><div class="bay-heading"><span class="player-number">01</span><div><small>PLAYER ONE</small><strong id="p1Name">Vault</strong></div></div><div class="selector-stage"><button type="button" class="cycle-btn" data-cycle="1" data-dir="-1">‹</button><div class="fighter-preview" id="p1Preview"></div><button type="button" class="cycle-btn" data-cycle="1" data-dir="1">›</button></div><div class="fighter-meta" id="p1Meta"></div><button type="button" class="ready-btn" id="p1Ready"><span class="ready-icon">×</span><span class="ready-copy"><b>NOT READY</b><small>Click to lock fighter</small></span></button><div class="control-card"><kbd>A</kbd><kbd>D</kbd><span>MOVE</span><kbd>W</kbd><span>JUMP</span><kbd>S</kbd><span>ATTACK</span></div></article>
+    <section class="match-column"><div class="vs-badge">VS</div><div class="mode-card"><span class="eyebrow">GAME MODE</span><strong>Classic 1v1</strong><small>3 stocks · last fighter standing</small></div><div class="stage-card"><div class="stage-head"><span class="eyebrow">STAGE</span><strong id="stageName">Random</strong></div><div class="stage-preview" id="stagePreview"></div><div class="stage-nav"><button type="button" class="cycle-btn small" data-map-cycle="-1">‹</button><span id="stageIndex">Random arena</span><button type="button" class="cycle-btn small" data-map-cycle="1">›</button></div></div><button type="button" class="btn primary fight-btn" id="startBattle" disabled>WAITING FOR PLAYERS</button></section>
+    <article class="player-bay p2-bay" id="p2Bay"><div class="bay-heading"><span class="player-number">02</span><div><small>PLAYER TWO</small><strong id="p2Name">Blitz</strong></div></div><div class="selector-stage"><button type="button" class="cycle-btn" data-cycle="2" data-dir="-1">‹</button><div class="fighter-preview" id="p2Preview"></div><button type="button" class="cycle-btn" data-cycle="2" data-dir="1">›</button></div><div class="fighter-meta" id="p2Meta"></div><button type="button" class="ready-btn" id="p2Ready"><span class="ready-icon">×</span><span class="ready-copy"><b>NOT READY</b><small>Click to lock fighter</small></span></button><div class="control-card"><kbd>←</kbd><kbd>→</kbd><span>MOVE</span><kbd>↑</kbd><span>JUMP</span><kbd>↓</kbd><span>ATTACK</span></div></article>
+  </div>
+  <div class="fighter-dock"><span class="dock-label">FIGHTER GRID</span><div class="char-row" id="sharedChars"></div></div>
+</section>
+
+<section class="screen online-menu-screen" id="screen-online-menu">
+  <div class="online-card online-card-wide">
+    <button type="button" class="back-btn" data-go="menu">← BACK</button>
+    <span class="eyebrow">ONLINE MULTIPLAYER</span>
+    <h2>Vault Brawl Online</h2>
+    <p class="online-lead">Sign in to create or join a room. Public lobbies appear in the browser below.</p>
+    <div class="online-user" id="onlineUser">Checking account…</div>
+
+    <div class="online-signin" id="onlineSigninPanel">
+      <div class="signin-grid">
+        <label class="signin-field"><span>Username</span><input type="text" id="onlineAuthUser" maxlength="24" autocomplete="username" spellcheck="false"></label>
+        <label class="signin-field"><span>Password</span><input type="password" id="onlineAuthPass" maxlength="64" autocomplete="current-password"></label>
+      </div>
+      <div class="signin-actions">
+        <button type="button" class="btn primary" id="onlineSigninBtn">SIGN IN</button>
+        <button type="button" class="btn ghost" id="onlineRetryAuthBtn">Retry auto sign-in</button>
+      </div>
+    </div>
+
+    <div class="online-actions" id="onlineActionsPanel" hidden>
+      <div class="create-room-card">
+        <span class="eyebrow">CREATE</span>
+        <label class="signin-field"><span>Lobby name</span><input type="text" id="onlineRoomName" maxlength="32" placeholder="My Vault lobby"></label>
+        <label class="public-toggle"><input type="checkbox" id="onlinePublicCheck" checked> List this room publicly</label>
+        <button type="button" class="btn primary" id="onlineCreateBtn">CREATE ROOM</button>
+      </div>
+      <div class="join-room-card">
+        <span class="eyebrow">JOIN WITH CODE</span>
+        <div class="join-row">
+          <input type="text" id="onlineJoinCode" maxlength="8" placeholder="ROOM CODE" autocomplete="off" spellcheck="false">
+          <button type="button" class="btn" id="onlineJoinBtn">JOIN</button>
+        </div>
+      </div>
+      <div class="public-browser">
+        <div class="public-browser-head">
+          <span class="eyebrow">PUBLIC LOBBIES</span>
+          <button type="button" class="btn tiny" id="onlineLobbyRefresh">Refresh</button>
+        </div>
+        <input type="search" id="onlineLobbySearch" maxlength="32" placeholder="Search by name, host, or code…" autocomplete="off" spellcheck="false">
+        <div class="public-lobby-list" id="onlineLobbyList"><div class="public-lobby-empty">Loading public lobbies…</div></div>
+      </div>
+    </div>
+
+    <p class="online-note" id="onlineMenuError"></p>
+    <div class="controls-help online-controls">
+      <h3>Online controls</h3>
+      <p><b>Move</b> A / D · <b>Jump</b> W or Space · <b>Aim</b> mouse up/down · <b>Fire</b> click · <b>Special</b> E</p>
+    </div>
+  </div>
+</section>
+
+<section class="screen online-lobby-screen" id="screen-online-lobby">
+  <header class="select-topbar"><button type="button" class="back-btn" id="onlineLeaveBtn">← LEAVE</button><div><span class="eyebrow">ONLINE LOBBY</span><h2>Waiting room</h2></div><div class="room-code-pill"># <span id="onlineRoomCode">----</span></div></header>
+  <div class="online-lobby-grid">
+    <article class="player-bay p1-bay online-bay">
+      <div class="bay-heading"><span class="player-number">YOU</span><div><small id="onlineMyLabel">PLAYER</small><strong id="onlineMyName">—</strong></div></div>
+      <div class="selector-stage"><button type="button" class="cycle-btn" id="onlineCharPrev">‹</button><div class="fighter-preview" id="onlineMyPreview"></div><button type="button" class="cycle-btn" id="onlineCharNext">›</button></div>
+      <div class="fighter-meta" id="onlineMyMeta"></div>
+      <button type="button" class="ready-btn" id="onlineReadyBtn"><span class="ready-icon">×</span><span class="ready-copy"><b>NOT READY</b><small>Lock fighter to ready up</small></span></button>
+    </article>
+    <section class="match-column online-match-column">
+      <div class="vs-badge">VS</div>
+      <div class="mode-card"><span class="eyebrow">ROOM</span><strong id="onlineStatusText">Waiting for opponent…</strong><small id="onlineStatusSub">Share the room code</small></div>
+      <div class="stage-card"><div class="stage-head"><span class="eyebrow">STAGE</span><strong id="onlineStageName">Random</strong></div><div class="stage-preview" id="onlineStagePreview"></div><div class="stage-nav"><button type="button" class="cycle-btn small" id="onlineMapPrev">‹</button><span id="onlineStageIndex">Random arena</span><button type="button" class="cycle-btn small" id="onlineMapNext">›</button></div></div>
+      <button type="button" class="btn primary fight-btn" id="onlineStartBtn" disabled>WAITING FOR PLAYERS</button>
+    </section>
+    <article class="player-bay p2-bay online-bay opponent-bay">
+      <div class="bay-heading"><span class="player-number">02</span><div><small>OPPONENT</small><strong id="onlineOppName">Waiting…</strong></div></div>
+      <div class="selector-stage"><div class="fighter-preview" id="onlineOppPreview"><div class="waiting-slot">?</div></div></div>
+      <div class="fighter-meta" id="onlineOppMeta"></div>
+      <div class="ready-btn readonly" id="onlineOppReady"><span class="ready-icon">×</span><span class="ready-copy"><b>NOT READY</b><small>—</small></span></div>
+    </article>
+  </div>
+  <p class="online-lobby-error" id="onlineLobbyError"></p>
+</section>
+
+<section class="screen" id="screen-shop"><div class="topbar"><button type="button" class="btn tiny" data-go="menu">← Menu</button><h2>Vault shop</h2><div class="coin-pill sm">◉ <span id="shopCoins">0</span></div></div><div class="chest-grid"><div class="chest-card"><div class="chest-icon normal">▣</div><h3>Vault Chest</h3><p>Common fighters and coin refunds</p><button type="button" class="btn" id="buyNormal">40 coins</button></div><div class="chest-card rare"><div class="chest-icon">◆</div><h3>Rare Chest</h3><p>Rare fighters and larger refunds</p><button type="button" class="btn gold" id="buyRare">120 coins</button></div></div><div class="shop-result" id="shopResult"></div></section>
+<section class="screen" id="screen-roster"><div class="topbar"><button type="button" class="btn tiny" data-go="menu">← Menu</button><h2>Fighter files</h2><span></span></div><div class="roster-grid" id="rosterGrid"></div></section>
+<section class="screen settings-screen" id="screen-settings"><div class="settings-card"><button type="button" class="close-settings" data-go="menu">×</button><span class="eyebrow">SYSTEM</span><h2>Battle settings</h2><div class="setting-row"><div><strong>Sound effects</strong><small>Menu and combat feedback</small></div><button type="button" class="toggle active" id="soundToggle">ON</button></div><div class="setting-row"><div><strong>Screen shake</strong><small>Impact motion during heavy hits</small></div><button type="button" class="toggle active" id="shakeToggle">ON</button></div><div class="controls-help"><h3>Controls</h3><p><b>P1</b> A/D move · W jump · S attack · E special</p><p><b>P2</b> Arrow keys move/jump · Down attack · Shift special</p><p><b>Match</b> Escape returns to fighter select</p></div></div></section>
+<section class="screen" id="screen-battle"><canvas id="c" width="960" height="540"></canvas><div class="battle-hud" id="battleHud"></div><button type="button" class="battle-menu-btn" id="battleMenuBtn">☰</button></section>
+<section class="screen" id="screen-results"><div class="result-card"><span class="eyebrow">MATCH COMPLETE</span><h2 id="resultTitle">Player 1 wins!</h2><div class="winner-preview" id="winnerPreview"></div><p id="resultDetail">+15 coins</p><div class="result-btns"><button type="button" class="btn primary" id="rematchBtn">Rematch</button><button type="button" class="btn" id="changeFightersBtn">Change fighters</button><button type="button" class="btn ghost" id="onlineResultLobbyBtn" style="display:none">Back to lobby</button><button type="button" class="btn ghost" data-go="menu">Main menu</button></div></div></section>
+</div>
+<script src="/arcade/games/vault-duel/data.js"></script><script src="/arcade/games/vault-duel/storage.js"></script><script src="/arcade/games/vault-duel/battle.js"></script><script src="/arcade/games/vault-duel/online.js"></script><script src="/arcade/games/vault-duel/main.js"></script>
+</body></html>

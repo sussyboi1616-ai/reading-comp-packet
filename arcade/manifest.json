@@ -1,0 +1,33 @@
+[
+  {
+    "id": "fishr",
+    "name": "Fishr",
+    "path": "/fishr/",
+    "icon": "/arcade/icons/fishr.svg",
+    "tagline": "2D fishing RPG · lakes · trade · prestige",
+    "standalone": true,
+    "multiplayer": true
+  },
+  {
+    "id": "vault-duel",
+    "name": "Vault Brawl",
+    "path": "/arcade/games/vault-duel/",
+    "icon": "/arcade/icons/vault-duel.svg",
+    "tagline": "2-player brawler · local + online · 10 stages",
+    "multiplayer": true
+  },
+  {
+    "id": "vault-stack",
+    "name": "Vault Stack",
+    "path": "/arcade/games/vault-stack/",
+    "icon": "/arcade/icons/vault-stack.svg",
+    "tagline": "Precision stacking · chase a new high score"
+  },
+  {
+    "id": "neon-drift",
+    "name": "Neon Drift",
+    "path": "/arcade/games/neon-drift/",
+    "icon": "/arcade/icons/neon-drift.svg",
+    "tagline": "Dodge the grid · collect energy · survive"
+  }
+]

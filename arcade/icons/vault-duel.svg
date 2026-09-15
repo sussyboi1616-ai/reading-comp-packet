@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" fill="none">
+  <rect width="128" height="128" rx="18" fill="#121828"/>
+  <rect x="20" y="78" width="88" height="14" rx="4" fill="#2a3348"/>
+  <rect x="36" y="58" width="56" height="10" rx="3" fill="#3a4558"/>
+  <rect x="52" y="38" width="24" height="10" rx="3" fill="#3a4558"/>
+  <rect x="30" y="64" width="22" height="28" rx="6" fill="#66c0f4"/>
+  <rect x="76" y="64" width="22" height="28" rx="6" fill="#e2b34d"/>
+  <text x="64" y="24" text-anchor="middle" fill="#e2b34d" font-family="system-ui,sans-serif" font-size="14" font-weight="700">BRAWL</text>
+</svg>

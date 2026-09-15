@@ -1,0 +1,10 @@
+[
+  { "id": "thumbs-up", "name": "Thumbs up", "file": "thumbs-up.svg", "kind": "image" },
+  { "id": "fire", "name": "Fire", "file": "fire.svg", "kind": "image" },
+  { "id": "skull", "name": "Skull", "file": "skull.svg", "kind": "image" },
+  { "id": "heart", "name": "Heart", "file": "heart.svg", "kind": "image" },
+  { "id": "gamepad", "name": "Gamepad", "file": "gamepad.svg", "kind": "image" },
+  { "id": "star", "name": "Star", "file": "star.svg", "kind": "image" },
+  { "id": "vault", "name": "Vault", "file": "vault.svg", "kind": "image" },
+  { "id": "lol", "name": "LOL", "file": "lol.svg", "kind": "image" }
+]
